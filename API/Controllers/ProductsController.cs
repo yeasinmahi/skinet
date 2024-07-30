@@ -6,12 +6,12 @@ namespace API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ProductController : ControllerBase
+    public class ProductsController : ControllerBase
     {
-        private readonly ILogger<ProductController> _logger;
+        private readonly ILogger<ProductsController> _logger;
         public IProductRepository Repo { get; }
 
-        public ProductController(IProductRepository repo, ILogger<ProductController> logger)
+        public ProductsController(IProductRepository repo, ILogger<ProductsController> logger)
         {
             Repo = repo;
             _logger = logger;
@@ -30,6 +30,19 @@ namespace API.Controllers
             var product= await Repo.GetProductByIdAsync(id);
             return product;
         }
+        [HttpGet("brands")]
+        public async Task<ActionResult<List<ProductBrand>>> GetProductBrands()
+        {
+            return Ok(await Repo.GetProductBrandsAsync());
+            
+        }
+        [HttpGet("types")]
+        public async Task<ActionResult<List<ProductType>>> GetProductTypes()
+        {
+            return Ok(await Repo.GetProductTypesAsync());
+            
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public string Error()
