@@ -6,36 +6,32 @@ namespace Infrustructure.Data
 {
     public class ProductRepository : IProductRepository
     {
-        private readonly StoreContext context;
+
+        public StoreContext Context { get; }
+
         public ProductRepository(StoreContext context)
         {
-            this.context = context;
+            Context = context;
         }
 
         public async Task<List<ProductBrand>> GetProductBrandsAsync()
         {
-            return await context.ProductBrands.ToListAsync();
+            return await Context.ProductBrands.ToListAsync();
         }
 
         public async Task<Product> GetProductByIdAsync(int id)
         {
-            return await context.Products
-            .Include(p=>p.ProductBrand)
-            .Include(p=>p.ProductType)
-            .FirstOrDefaultAsync(p=>p.Id == id);
+            return await Context.Products.FindAsync(id);
         }
 
         public async Task<List<Product>> GetProductsAsync()
         {
-            return await context.Products
-            .Include(p=>p.ProductBrand)
-            .Include(p=>p.ProductType)
-            .ToListAsync();
+            return await Context.Products.ToListAsync();
         }
 
         public async Task<List<ProductType>> GetProductTypesAsync()
         {
-            return await context.ProductTypes.ToListAsync();
+            return await Context.ProductTypes.ToListAsync();
         }
     }
 }
