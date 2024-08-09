@@ -32,15 +32,9 @@
               }
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss"
             ],
-            "scripts": [],
-            "server": "src/main.server.ts",
-            "prerender": true,
-            "ssr": {
-              "entry": "server.ts"
-            }
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -68,11 +62,6 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "sslCert": "ssl/localhost.pem",
-            "sslKey": "ssl/localhost-key.pem",
-            "ssl": true
-          },
           "configurations": {
             "production": {
               "buildTarget": "client:build:production"
@@ -109,8 +98,5 @@
         }
       }
     }
-  },
-  "cli": {
-    "analytics": "435bc320-9478-46f0-91c8-62aec379c170"
   }
 }
